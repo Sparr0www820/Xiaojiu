@@ -27,6 +27,7 @@
 
     <ItemGroup>
       <Content Include="icon.svg" />
+      <Content Include="README.md" />
       <Content Include="Xiaojiu\images\cards\Placeholder.png" />
       <Content Include="Xiaojiu\images\cards\Placeholder.png.import" />
       <Content Include="Xiaojiu\images\cards\TestCard.png" />
