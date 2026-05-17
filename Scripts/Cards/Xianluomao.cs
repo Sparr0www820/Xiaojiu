@@ -26,7 +26,7 @@ public class Xianluomao : ModCardTemplate
     private const bool shouldShowInCardLibrary = true;
 
     public override CardAssetProfile AssetProfile => new(
-        PortraitPath: $"res://Xiaojiu/images/cards/Placeholder.png"
+        PortraitPath: $"res://Xiaojiu/images/cards/{GetType().Name}.png"
     );
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [

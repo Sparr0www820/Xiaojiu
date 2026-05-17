@@ -25,7 +25,7 @@ public class TestGainEnergy : ModCardTemplate
     ];
 
     public override CardAssetProfile AssetProfile => new(
-        PortraitPath: "res://Xiaojiu/images/cards/TestCard.png"
+        PortraitPath: $"res://Xiaojiu/images/cards/{GetType().Name}.png"
     );
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [

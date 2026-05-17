@@ -28,7 +28,7 @@ public class CatLover : ModCardTemplate
 
     // 卡图资源
     public override CardAssetProfile AssetProfile => new(
-        PortraitPath: $"res://Xiaojiu/images/cards/Placeholder.png"
+        PortraitPath: $"res://Xiaojiu/images/cards/{GetType().Name}.png"
     );
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [

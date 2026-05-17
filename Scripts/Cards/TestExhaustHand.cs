@@ -20,7 +20,7 @@ public class TestExhaustHand : ModCardTemplate
     private const bool shouldShowInCardLibrary = true;
 
     public override CardAssetProfile AssetProfile => new(
-        PortraitPath: "res://Xiaojiu/images/cards/TestCard.png"
+        PortraitPath: $"res://Xiaojiu/images/cards/{GetType().Name}.png"
     );
 
     public TestExhaustHand() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
