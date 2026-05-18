@@ -23,7 +23,7 @@ public class Xianluomao : ModCardTemplate
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Token;
     private const TargetType targetType = TargetType.Self;
-    private const bool shouldShowInCardLibrary = true;
+    private const bool shouldShowInCardLibrary = false;
 
     public override CardAssetProfile AssetProfile => new(
         PortraitPath: $"res://Xiaojiu/images/cards/{GetType().Name}.png"
@@ -31,7 +31,7 @@ public class Xianluomao : ModCardTemplate
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("DrawCardNextTurn", 1),
-        new CardsVar(1)
+        new CardsVar(2)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [

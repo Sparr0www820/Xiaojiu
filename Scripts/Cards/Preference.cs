@@ -1,4 +1,4 @@
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -8,20 +8,20 @@ using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using Xiaojiu.Scripts;
 using Xiaojiu.Scripts.CardPools;
+using Xiaojiu.Scripts.Powers;
 
 namespace Xiaojiu.Scripts.Cards;
 
 [RegisterCard(typeof(XiaojiuCardPool))]
-public class TestGainEnergy : ModCardTemplate
+public class Preference : ModCardTemplate
 {
-    private const int energyCost = 0;
+    private const int energyCost = 1;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Common;
     private const TargetType targetType = TargetType.Self;
     private const bool shouldShowInCardLibrary = true;
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [
-        CardKeyword.Exhaust
     ];
 
     public override CardAssetProfile AssetProfile => new(
@@ -29,20 +29,20 @@ public class TestGainEnergy : ModCardTemplate
     );
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new EnergyVar(2)
+        new DynamicVar("Cats", 1)
     ];
 
-    public TestGainEnergy() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
+    public Preference() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
     {
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
+        await PowerCmd.Apply<PreferencePower>(choiceContext, Owner.Creature, DynamicVars["Cats"].BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Energy.UpgradeValueBy(1);
+        DynamicVars["Cats"].UpgradeValueBy(1);
     }
 }

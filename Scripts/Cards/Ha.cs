@@ -1,32 +1,29 @@
-﻿using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Keywords;
 using STS2RitsuLib.Scaffolding.Content;
-using Xiaojiu.Scripts.Characters;
+using Xiaojiu.Scripts;
 using Xiaojiu.Scripts.CardPools;
 
 namespace Xiaojiu.Scripts.Cards;
 
 [RegisterCard(typeof(XiaojiuCardPool))]
-public class DefendXiaojiu : ModCardTemplate
+public class Ha : ModCardTemplate
 {
     private const int energyCost = 1;
     private const CardType type = CardType.Skill;
-    private const CardRarity rarity = CardRarity.Basic;
-    private const TargetType targetType = TargetType.Self;
+    private const CardRarity rarity = CardRarity.Common;
+    private const TargetType targetType = TargetType.AllEnemies;
     private const bool shouldShowInCardLibrary = true;
-
-    public override bool GainsBlock => true;
     
-    protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Defend };
-
     public override CardAssetProfile AssetProfile => new(
         PortraitPath: $"res://Xiaojiu/images/cards/{GetType().Name}.png"
         // 卡框等，有需求自己添加。需要自行判断卡牌类型（攻击、技能、能力等）设置，建议写在基类里。
@@ -37,22 +34,22 @@ public class DefendXiaojiu : ModCardTemplate
     );
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(5, ValueProp.Move)
+        new PowerVar<VulnerablePower>(1),
+		new DynamicVar("Maodies", 1)
     ];
 
-    public DefendXiaojiu() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
+    public Ha() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
     {
     }
-
+    
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.GainBlock(base.Owner.Creature,
-            DynamicVars.Block,
-            cardPlay);
+		await Maodie.CreateInHand(Owner, DynamicVars["Maodies"].IntValue, CombatState);
+        await PowerCmd.Apply<VulnerablePower>(choiceContext, CombatState.HittableEnemies, DynamicVars.Vulnerable.BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(3);
+        DynamicVars["Maodies"].UpgradeValueBy(1);
     }
 }

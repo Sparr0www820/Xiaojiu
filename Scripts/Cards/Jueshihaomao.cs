@@ -22,14 +22,15 @@ public class Jueshihaomao : ModCardTemplate
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Token;
     private const TargetType targetType = TargetType.Self;
-    private const bool shouldShowInCardLibrary = true;
+    private const bool shouldShowInCardLibrary = false;
 
     public override CardAssetProfile AssetProfile => new(
         PortraitPath: $"res://Xiaojiu/images/cards/{GetType().Name}.png"
     );
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(4, ValueProp.Move),
+        new BlockVar(5, ValueProp.Move),
+        new DynamicVar("BlockAfterExhausted", 4),
         new CardsVar(1)
     ];
 
@@ -45,23 +46,22 @@ public class Jueshihaomao : ModCardTemplate
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner, true);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, null);
         EnergyCost.AddThisCombat(1);
-        DynamicVars.Block.BaseValue *= 2;
+        DynamicVars["BlockAfterExhausted"].BaseValue *= 2;
     }
 
     public override async Task AfterCardExhausted(PlayerChoiceContext choiceContext, CardModel card, bool causedByEthereal)
     {
         if (card == this)
         {
-            await CreatureCmd.GainBlock(base.Owner.Creature,
-                DynamicVars.Block, null);
+            await CreatureCmd.GainBlock(Owner.Creature,
+                new BlockVar(DynamicVars["BlockAfterExhausted"].BaseValue, ValueProp.Move), null);
         }
     }
 
     protected override void OnUpgrade()
     {
-        // DynamicVars.Block.UpgradeValueBy(2);
-        DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars.Block.UpgradeValueBy(2);
     }
 }

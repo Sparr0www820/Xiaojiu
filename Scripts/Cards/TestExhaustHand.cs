@@ -10,7 +10,7 @@ using Xiaojiu.Scripts.CardPools;
 
 namespace Xiaojiu.Scripts.Cards;
 
-[RegisterCard(typeof(XiaojiuCardPool))]
+// [RegisterCard(typeof(XiaojiuCardPool))]
 public class TestExhaustHand : ModCardTemplate
 {
     private const int energyCost = 1;

@@ -1,4 +1,5 @@
 ﻿{
-  "XIAOJIU_POWER_CAT_LOVER.description": "每当你抽到猫牌时，将其消耗并添加1张复制到你的手牌。",
+  "XIAOJIU_POWER_CAT_LOVER.description": "每当你抽到猫牌时，将其[gold]消耗[/gold]并添加1张复制到你的[gold]手牌[/gold]。",
+  "XIAOJIU_POWER_CAT_LOVER.smartDescription": "每当你抽到猫牌时，将其[gold]消耗[/gold]并添加1张复制到你的[gold]手牌[/gold]。",
   "XIAOJIU_POWER_CAT_LOVER.title": "爱猫人士"
 }

@@ -20,21 +20,19 @@ namespace Xiaojiu.Scripts.Cards;
 [RegisterCard(typeof(TokenCardPool))]
 public class Heimao : ModCardTemplate
 {
-    private const string _strengthLossKey = "StrengthLoss";
-    
     private const int energyCost = 0;
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Token;
-    private const TargetType targetType = TargetType.Self;
-    private const bool shouldShowInCardLibrary = true;
+    private const TargetType targetType = TargetType.AnyEnemy;
+    private const bool shouldShowInCardLibrary = false;
 
     public override CardAssetProfile AssetProfile => new(
         PortraitPath: $"res://Xiaojiu/images/cards/{GetType().Name}.png"
     );
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("StrengthLoss", 2),
-        new CardsVar(1)
+        new DynamicVar("StrengthLoss", 3),
+        new PowerVar<WeakPower>(1)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [
@@ -49,7 +47,7 @@ public class Heimao : ModCardTemplate
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner, true);
+        await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target!, DynamicVars.Weak.BaseValue, Owner.Creature, this);
         EnergyCost.AddThisCombat(1);
         DynamicVars["StrengthLoss"].BaseValue *= 2;
     }
@@ -58,7 +56,7 @@ public class Heimao : ModCardTemplate
     {
         if (card == this)
         {
-            foreach (Creature hittableEnemy in CombatState.HittableEnemies)
+            foreach (Creature hittableEnemy in CombatState!.HittableEnemies)
             {
                 await PowerCmd.Apply<PiercingWailPower>(choiceContext, hittableEnemy, base.DynamicVars["StrengthLoss"].BaseValue, base.Owner.Creature, this);
             }
@@ -66,8 +64,7 @@ public class Heimao : ModCardTemplate
     }
 
     protected override void OnUpgrade()
-    {
-        // DynamicVars["StrengthLoss"].UpgradeValueBy(1);
-        DynamicVars.Cards.UpgradeValueBy(1);
-    }
+	{
+		DynamicVars.Weak.UpgradeValueBy(1);
+	}
 }

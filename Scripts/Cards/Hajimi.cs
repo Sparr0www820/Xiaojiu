@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -22,15 +23,15 @@ public class Hajimi : ModCardTemplate
     private const CardType type = CardType.Skill;
     private const CardRarity rarity = CardRarity.Token;
     private const TargetType targetType = TargetType.Self;
-    private const bool shouldShowInCardLibrary = true;
+    private const bool shouldShowInCardLibrary = false;
 
     public override CardAssetProfile AssetProfile => new(
         PortraitPath: $"res://Xiaojiu/images/cards/{GetType().Name}.png"
     );
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new HealVar(2),
-        new CardsVar(1)
+        new PowerVar<DexterityPower>(2),
+        new HealVar(2)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [
@@ -45,7 +46,7 @@ public class Hajimi : ModCardTemplate
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner, true);
+        await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature, DynamicVars["DexterityPower"].BaseValue, Owner.Creature, this);
         EnergyCost.AddThisCombat(1);
         DynamicVars.Heal.BaseValue *= 2;
     }
@@ -60,7 +61,6 @@ public class Hajimi : ModCardTemplate
 
     protected override void OnUpgrade()
     {
-        // DynamicVars.Heal.UpgradeValueBy(1);
-        DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars.Dexterity.UpgradeValueBy(1);
     }
 }

@@ -99,12 +99,13 @@ public class Xiaojiu : ModCharacterTemplate<XiaojiuCardPool, XiaojiuRelicPool, X
     // 初始卡组，或者在卡牌类上用RegisterCharacterStarterCard就不用写这个
     protected override IEnumerable<StartingDeckEntry> StartingDeckEntries => [
         new(typeof(StrikeXiaojiu), 5),
-        new(typeof(DefendXiaojiu), 5)
+        new(typeof(DefendXiaojiu), 4),
+        new(typeof(CatDecisions), 1)
     ];
 
     // 初始遗物，或者在遗物类上用RegisterCharacterStarterRelic就不用写这个
     protected override IEnumerable<Type> StartingRelicTypes => [
-        typeof(Akabeko)
+        typeof(BagOfPreparation)
     ];
 
     // 攻击建筑师的攻击特效列表
