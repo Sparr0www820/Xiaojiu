@@ -1,5 +1,17 @@
 ﻿{
-  "XIAOJIU_POWER_CAT_LOVER.description": "每当你抽到猫牌时，将其[gold]消耗[/gold]并添加1张复制到你的[gold]手牌[/gold]。",
-  "XIAOJIU_POWER_CAT_LOVER.smartDescription": "每当你抽到猫牌时，将其[gold]消耗[/gold]并添加1张复制到你的[gold]手牌[/gold]。",
-  "XIAOJIU_POWER_CAT_LOVER.title": "爱猫人士"
+  "XIAOJIU_POWER_CAT_LOVER_POWER.description": "每当你抽到猫牌时，将其[gold]消耗[/gold]并添加1张复制到你的[gold]手牌[/gold]。",
+  "XIAOJIU_POWER_CAT_LOVER_POWER.smartDescription": "每当你抽到猫牌时，将其[gold]消耗[/gold]并添加1张复制到你的[gold]手牌[/gold]。",
+  "XIAOJIU_POWER_CAT_LOVER_POWER.title": "爱猫人士",
+  "XIAOJIU_POWER_FRIEND_OF_JIMI_POWER.description": "在你的回合开始时，将一张猫牌加入你的手牌。",
+  "XIAOJIU_POWER_FRIEND_OF_JIMI_POWER.smartDescription": "在你的回合开始时，将[blue]{Amount}[/blue]张猫牌加入你的手牌。",
+  "XIAOJIU_POWER_FRIEND_OF_JIMI_POWER.title": "基米之友",
+  "XIAOJIU_POWER_PREFERENCE_POWER.description": "你的下一张能力牌会额外打出一次。",
+  "XIAOJIU_POWER_PREFERENCE_POWER.smartDescription": "你的下[blue]{Amount}[/blue]张猫牌会额外打出一次。",
+  "XIAOJIU_POWER_PREFERENCE_POWER.title": "偏爱",
+  "XIAOJIU_POWER_YANG_POWER.description": "阳",
+  "XIAOJIU_POWER_YANG_POWER.smartDescription": "阳",
+  "XIAOJIU_POWER_YANG_POWER.title": "阳",
+  "XIAOJIU_POWER_YIN_POWER.description": "阴",
+  "XIAOJIU_POWER_YIN_POWER.smartDescription": "阴",
+  "XIAOJIU_POWER_YIN_POWER.title": "阴"
 }

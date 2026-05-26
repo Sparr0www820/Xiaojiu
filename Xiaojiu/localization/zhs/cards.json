@@ -31,5 +31,7 @@
   "XIAOJIU_CARD_PREFERENCE.description": "你打出的下{Cats:diff()}张猫牌会被额外打出一次。",
   "XIAOJIU_CARD_PREFERENCE.title": "偏爱",
   "XIAOJIU_CARD_CAT_COMMANDO.description": "本回合中每打出过一张猫牌，此牌额外造成{Damage:diff()}点伤害一次。{InCombat:\n（命中{CalculatedHits:diff()}次）|}",
-  "XIAOJIU_CARD_CAT_COMMANDO.title": "猫猫突击队"
+  "XIAOJIU_CARD_CAT_COMMANDO.title": "猫猫突击队",
+  "XIAOJIU_CARD_TEST_YIN_YANG.description": "造成6点伤害。\n[gold]阳盈[/gold]：额外造成一次。\n[gold]阴盈[/gold]：获得5点格挡。",
+  "XIAOJIU_CARD_TEST_YIN_YANG.title": "测试阴阳"
 }
